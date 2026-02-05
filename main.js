@@ -1,3 +1,8 @@
+function pronounceWord(word) {
+  const utterance = new SpeechSynthesisUtterance(word);
+  utterance.lang = "en-EN"; // English
+  window.speechSynthesis.speak(utterance);
+}
 async function loadData() {
   const res = await fetch("https://openapi.programming-hero.com/api/words/all");
   const data = await res.json();
@@ -18,7 +23,7 @@ async function loadData() {
             <button onclick="handleDetails(${element.id})" class="w-8 h-8 flex items-center justify-center rounded-full bg-blue-50 text-gray-600 hover:bg-blue-100 transition">
                 <i class="fa-solid fa-info"></i>
             </button>
-            <button class="w-8 h-8 flex items-center justify-center rounded-full bg-blue-50 text-gray-600 hover:bg-blue-100 transition">
+            <button onclick="pronounceWord('${element.word}')" class="w-8 h-8 flex items-center justify-center rounded-full bg-blue-50 text-gray-600 hover:bg-blue-100 transition">
                 <i class="fa-solid fa-volume-high"></i>
             </button>
         </div>
@@ -201,3 +206,5 @@ lesson7.addEventListener("click", function () {
 });
 
 loadData();
+
+
