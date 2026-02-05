@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>English Learning Platform</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Poppins', 'Noto Sans Bengali', sans-serif;
+        }
+        /* Custom border radius for specific corners if needed */
+        .blob-shape {
+            border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+        }
+    </style>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#4338ca', /* Indigo-700/Blueish */
+                        secondary: '#f3f4f6', /* Light Gray */
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-white text-gray-800">
+
+    <nav class="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
+        <div class="flex items-center gap-2">
+            <div class="text-xl font-bold flex items-center gap-1">
+                <span class="text-black">English</span>
+                <i class="fa-brands fa-microsoft text-blue-500 text-lg"></i>
+                <span class="text-black">বাংলা</span>
+            </div>
+        </div>
+
+        <div class="flex gap-3">
+            <button id="btn-faq" class="px-4 py-1.5 border border-primary text-primary rounded text-sm font-medium hover:bg-blue-50 transition">
+                <i class="fa-regular fa-circle-question mr-1"></i> FAQ
+            </button>
+            <button id="btn-learn" class="px-4 py-1.5 border border-primary text-primary rounded text-sm font-medium hover:bg-blue-50 transition">
+                <i class="fa-solid fa-book-open mr-1"></i> Learn
+            </button>
+            <button id="btn-logout" class="px-4 py-1.5 border border-primary text-primary rounded text-sm font-medium hover:bg-blue-50 transition">
+                <i class="fa-solid fa-arrow-right-from-bracket mr-1"></i> Logout
+            </button>
+        </div>
+    </nav>
+
+    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-20">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            
+            <div class="space-y-6">
+                <h1 class="text-4xl lg:text-5xl font-bold">
+                    <span class="text-cyan-500">English</span> is Easy!!
+                </h1>
+                <p class="text-gray-600 leading-relaxed text-lg">
+                    আজ থেকেই আপনার ভাষা শেখার যাত্রা শুরু করুন। আপনি যদি নতুন হন অথবা আপনার দক্ষতা বাড়াতে চান, আমাদের Interactive Lessons আপনাকে নিয়ে যাবে অন্য একটি Level এ।
+                </p>
+
+                <div class="space-y-3 max-w-md">
+                    <input type="text" id="input-name" placeholder="Enter Your Name" class="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:border-primary">
+                    <input type="email" id="input-email" placeholder="--------" class="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:border-primary">
+                </div>
+
+                <button id="btn-get-started" class="bg-primary text-white px-8 py-2.5 rounded shadow hover:bg-indigo-800 transition">
+                    Get Started
+                </button>
+            </div>
+
+            <div class="relative flex justify-center">
+                <div class="absolute -top-10 -left-10 w-full h-full opacity-20 pointer-events-none">
+                    <div class="grid grid-cols-6 gap-4">
+                        <div class="w-3 h-3 bg-blue-400 rounded-full"></div>
+                        <div class="w-3 h-3 bg-blue-400 rounded-full translate-y-4"></div>
+                        <div class="w-3 h-3 bg-blue-400 rounded-full translate-y-8"></div>
+                    </div>
+                </div>
+
+                <div class="relative w-80 h-80 lg:w-96 lg:h-96 rounded-full border-4 border-blue-400 overflow-hidden shadow-xl z-10 bg-blue-100">
+                    <img src="https://images.unsplash.com/photo-1540569014015-19a7be504e3a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Happy Student" class="w-full h-full object-cover">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="bg-gray-50 py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <div class="text-center mb-8">
+                <h2 class="text-3xl font-bold mb-6">Let's <span class="text-black">Learn Vocabularies</span></h2>
+                
+                <div id="lesson-tabs" class="flex flex-wrap justify-center gap-3">
+                    <button class="px-4 py-1 border rounded bg-white text-primary border-primary shadow-sm hover:bg-blue-50 transition">Lesson-1</button>
+                    <button class="px-4 py-1 border rounded bg-primary text-white border-primary shadow-sm">Lesson-2</button>
+                    <button class="px-4 py-1 border rounded bg-white text-primary border-primary shadow-sm hover:bg-blue-50 transition">Lesson-3</button>
+                    <button class="px-4 py-1 border rounded bg-white text-primary border-primary shadow-sm hover:bg-blue-50 transition">Lesson-4</button>
+                    <button class="px-4 py-1 border rounded bg-white text-primary border-primary shadow-sm hover:bg-blue-50 transition">Lesson-5</button>
+                    <button class="px-4 py-1 border rounded bg-white text-primary border-primary shadow-sm hover:bg-blue-50 transition">Lesson-6</button>
+                    <button class="px-4 py-1 border rounded bg-white text-primary border-primary shadow-sm hover:bg-blue-50 transition">Lesson-7</button>
+                </div>
+            </div>
+
+            <div id="vocabulary-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                
+                <div class="bg-white p-6 rounded-xl shadow-sm hover:shadow-md transition border border-gray-100 flex flex-col items-center text-center">
+                    <h3 class="text-xl font-bold text-gray-800 mb-1">Eager</h3>
+                    <p class="text-xs text-gray-500 mb-3">Meaning / Pronunciation</p>
+                    <p class="text-lg font-medium text-gray-700 mb-6">"আগ্রহী / ইগার"</p>
+                    <div class="w-full flex justify-between items-center mt-auto">
+                        <button class="w-8 h-8 flex items-center justify-center rounded-full bg-blue-50 text-gray-600 hover:bg-blue-100 transition"><i class="fa-solid fa-info"></i></button>
+                        <button class="w-8 h-8 flex items-center justify-center rounded-full bg-blue-50 text-gray-600 hover:bg-blue-100 transition"><i class="fa-solid fa-volume-high"></i></button>
+                    </div>
+                </div>
+
+                <div class="bg-white p-6 rounded-xl shadow-sm hover:shadow-md transition border border-gray-100 flex flex-col items-center text-center">
+                    <h3 class="text-xl font-bold text-gray-800 mb-1">Hesitate</h3>
+                    <p class="text-xs text-gray-500 mb-3">Meaning / Pronunciation</p>
+                    <p class="text-lg font-medium text-gray-700 mb-6">"দ্বিধা করা / হেজিটেট"</p>
+                    <div class="w-full flex justify-between items-center mt-auto">
+                        <button class="w-8 h-8 flex items-center justify-center rounded-full bg-blue-50 text-gray-600 hover:bg-blue-100 transition"><i class="fa-solid fa-info"></i></button>
+                        <button class="w-8 h-8 flex items-center justify-center rounded-full bg-blue-50 text-gray-600 hover:bg-blue-100 transition"><i class="fa-solid fa-volume-high"></i></button>
+                    </div>
+                </div>
+
+                <div class="bg-white p-6 rounded-xl shadow-sm hover:shadow-md transition border border-gray-100 flex flex-col items-center text-center">
+                    <h3 class="text-xl font-bold text-gray-800 mb-1">Linger</h3>
+                    <p class="text-xs text-gray-500 mb-3">Meaning / Pronunciation</p>
+                    <p class="text-lg font-medium text-gray-700 mb-6">"থেমে থাকা / বিলম্ব করা / লিঙ্গার"</p>
+                    <div class="w-full flex justify-between items-center mt-auto">
+                        <button class="w-8 h-8 flex items-center justify-center rounded-full bg-blue-50 text-gray-600 hover:bg-blue-100 transition"><i class="fa-solid fa-info"></i></button>
+                        <button class="w-8 h-8 flex items-center justify-center rounded-full bg-blue-50 text-gray-600 hover:bg-blue-100 transition"><i class="fa-solid fa-volume-high"></i></button>
+                    </div>
+                </div>
+
+                 <div class="bg-white p-6 rounded-xl shadow-sm hover:shadow-md transition border border-gray-100 flex flex-col items-center text-center">
+                    <h3 class="text-xl font-bold text-gray-800 mb-1">Nourish</h3>
+                    <p class="text-xs text-gray-500 mb-3">Meaning / Pronunciation</p>
+                    <p class="text-lg font-medium text-gray-700 mb-6">"পুষ্টি যোগানো / নরিশ"</p>
+                    <div class="w-full flex justify-between items-center mt-auto">
+                        <button class="w-8 h-8 flex items-center justify-center rounded-full bg-blue-50 text-gray-600 hover:bg-blue-100 transition"><i class="fa-solid fa-info"></i></button>
+                        <button class="w-8 h-8 flex items-center justify-center rounded-full bg-blue-50 text-gray-600 hover:bg-blue-100 transition"><i class="fa-solid fa-volume-high"></i></button>
+                    </div>
+                </div>
+
+                <div class="bg-white p-6 rounded-xl shadow-sm hover:shadow-md transition border border-gray-100 flex flex-col items-center text-center">
+                    <h3 class="text-xl font-bold text-gray-800 mb-1">Reluctant</h3>
+                    <p class="text-xs text-gray-500 mb-3">Meaning / Pronunciation</p>
+                    <p class="text-lg font-medium text-gray-700 mb-6">"অনিচ্ছুক / রিলাকট্যান্ট"</p>
+                    <div class="w-full flex justify-between items-center mt-auto">
+                        <button class="w-8 h-8 flex items-center justify-center rounded-full bg-blue-50 text-gray-600 hover:bg-blue-100 transition"><i class="fa-solid fa-info"></i></button>
+                        <button class="w-8 h-8 flex items-center justify-center rounded-full bg-blue-50 text-gray-600 hover:bg-blue-100 transition"><i class="fa-solid fa-volume-high"></i></button>
+                    </div>
+                </div>
+
+                <div class="bg-white p-6 rounded-xl shadow-sm hover:shadow-md transition border border-gray-100 flex flex-col items-center text-center">
+                    <h3 class="text-xl font-bold text-gray-800 mb-1">Vague</h3>
+                    <p class="text-xs text-gray-500 mb-3">Meaning / Pronunciation</p>
+                    <p class="text-lg font-medium text-gray-700 mb-6">"অস্পষ্ট / ভেইগ"</p>
+                    <div class="w-full flex justify-between items-center mt-auto">
+                        <button class="w-8 h-8 flex items-center justify-center rounded-full bg-blue-50 text-gray-600 hover:bg-blue-100 transition"><i class="fa-solid fa-info"></i></button>
+                        <button class="w-8 h-8 flex items-center justify-center rounded-full bg-blue-50 text-gray-600 hover:bg-blue-100 transition"><i class="fa-solid fa-volume-high"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+        <h2 class="text-3xl font-bold text-center mb-8">
+            <span class="text-cyan-500">Frequently</span> Asked Questions
+        </h2>
+
+        <div id="faq-container" class="space-y-4">
+            
+            <div class="border rounded-lg overflow-hidden">
+                <button class="w-full px-6 py-4 text-left bg-gray-100 hover:bg-gray-200 flex justify-between items-center focus:outline-none">
+                    <span class="font-semibold text-sm">1. How can I start learning English on this website?</span>
+                    <i class="fa-solid fa-minus text-gray-500"></i>
+                </button>
+                <div class="px-6 py-4 bg-gray-50 text-gray-600 text-xs leading-relaxed border-t">
+                    You can start by exploring our beginner lessons, interactive exercises, and quizzes. We also offer structured courses to guide you step by step.
+                </div>
+            </div>
+
+            <div class="border rounded-lg overflow-hidden">
+                <button class="w-full px-6 py-4 text-left bg-gray-50 hover:bg-gray-100 flex justify-between items-center focus:outline-none">
+                    <span class="font-semibold text-sm">2. Is this website free to use?</span>
+                    <i class="fa-solid fa-plus text-gray-400"></i>
+                </button>
+            </div>
+
+            <div class="border rounded-lg overflow-hidden">
+                <button class="w-full px-6 py-4 text-left bg-gray-50 hover:bg-gray-100 flex justify-between items-center focus:outline-none">
+                    <span class="font-semibold text-sm">3. Do I need to create an account?</span>
+                    <i class="fa-solid fa-plus text-gray-400"></i>
+                </button>
+            </div>
+
+            <div class="border rounded-lg overflow-hidden">
+                <button class="w-full px-6 py-4 text-left bg-gray-50 hover:bg-gray-100 flex justify-between items-center focus:outline-none">
+                    <span class="font-semibold text-sm">4. How can I build my English vocabulary?</span>
+                    <i class="fa-solid fa-plus text-gray-400"></i>
+                </button>
+            </div>
+
+             <div class="border rounded-lg overflow-hidden">
+                <button class="w-full px-6 py-4 text-left bg-gray-50 hover:bg-gray-100 flex justify-between items-center focus:outline-none">
+                    <span class="font-semibold text-sm">5. Do you offer certificates for completed courses?</span>
+                    <i class="fa-solid fa-plus text-gray-400"></i>
+                </button>
+            </div>
+
+        </div>
+    </section>
+
+    <footer class="bg-blue-50 py-10 mt-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-6">
+                
+                <div class="text-center md:text-left">
+                     <div class="text-xl font-bold flex items-center justify-center md:justify-start gap-1 mb-2">
+                        <span class="text-black">English</span>
+                        <i class="fa-brands fa-microsoft text-blue-500 text-lg"></i>
+                        <span class="text-black">বাংলা</span>
+                    </div>
+                    <p class="text-gray-500 text-xs">ইংরেজি শিখুন সহজে</p>
+                    <p class="text-gray-400 text-[10px] mt-1">Providing ED-Tech Applications since 2025</p>
+                </div>
+
+                <div class="text-center md:text-right">
+                    <p class="text-xs font-bold mb-2 uppercase tracking-wide">Follow Us</p>
+                    <div class="flex gap-4 text-lg">
+                        <a href="#" class="text-gray-800 hover:text-blue-600"><i class="fa-brands fa-facebook"></i></a>
+                        <a href="#" class="text-gray-800 hover:text-red-600"><i class="fa-brands fa-youtube"></i></a>
+                        <a href="#" class="text-gray-800 hover:text-pink-600"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="#" class="text-gray-800 hover:text-gray-600"><i class="fa-brands fa-github"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
