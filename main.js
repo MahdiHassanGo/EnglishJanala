@@ -1,27 +1,81 @@
 async function loadData() {
   const res = await fetch("https://openapi.programming-hero.com/api/words/all");
   const data = await res.json();
-  console.log(data);
 
   const div = document.getElementById("vocabulary-grid");
+  div.innerHTML = ""; 
+
   data.data.forEach((element) => {
     const div2 = document.createElement("div");
     div2.classList.add("vocabulary-card");
     div2.innerHTML = `
-       <div class="bg-white p-6 rounded-xl shadow-sm hover:shadow-md transition border border-gray-100 flex flex-col items-center text-cente">
-        <h3>${element.word}</h3>
-        <h4>Meaning/Pronunciation</h4>
-        <p>${element.meaning} /${element.pronunciation}</p>
+       <div class="bg-white p-6 rounded-xl shadow-sm hover:shadow-md transition border border-gray-100 flex flex-col items-center text-center h-full">
+        <h3 class="text-xl font-bold">${element.word}</h3>
+        <h4 class="text-xs text-gray-500">Meaning/Pronunciation</h4>
+        <p class="text-gray-700">${element.meaning || "N/A"} / ${element.pronunciation}</p>
        
-    <div class="w-full flex justify-between items-center mt-auto">
-                        <button class="w-8 h-8 flex items-center justify-center rounded-full bg-blue-50 text-gray-600 hover:bg-blue-100 transition"><i class="fa-solid fa-info"></i></button>
-                        <button class="w-8 h-8 flex items-center justify-center rounded-full bg-blue-50 text-gray-600 hover:bg-blue-100 transition"><i class="fa-solid fa-volume-high"></i></button>
-                    </div>
-                    </div>
+        <div class="w-full flex justify-between items-center mt-auto pt-4">
+            <button onclick="handleDetails(${element.id})" class="w-8 h-8 flex items-center justify-center rounded-full bg-blue-50 text-gray-600 hover:bg-blue-100 transition">
+                <i class="fa-solid fa-info"></i>
+            </button>
+            <button class="w-8 h-8 flex items-center justify-center rounded-full bg-blue-50 text-gray-600 hover:bg-blue-100 transition">
+                <i class="fa-solid fa-volume-high"></i>
+            </button>
+        </div>
+      </div>
     `;
     div.appendChild(div2);
   });
-}
+} 
+
+const handleDetails = async (id) => { 
+    console.log("Fetching details for ID:", id);
+    
+    const response = await fetch(`https://openapi.programming-hero.com/api/word/${id}`);
+    const response2 = await fetch(`https://openapi.programming-hero.com/api/words/all`);
+
+    const result2 = await response2.json();
+    const wordData2 = result2.data; 
+    const result = await response.json();
+    const wordData = result.data; 
+    const modalContainer = document.createElement("div");
+    modalContainer.innerHTML = `
+        <dialog id="modal-${id}" class="modal border-none rounded-xl p-0 backdrop:bg-black/60">
+          <div class="modal-box bg-white p-8 rounded-xl shadow-2xl max-w-md w-full relative">
+            <form method="dialog">
+                <button class="btn btn-sm btn-circle absolute right-4 top-4 bg-gray-100 hover:bg-gray-200 border-none">✕</button>
+            </form>
+            
+            <h3 class="text-2xl font-bold text-blue-600 mb-2">${wordData.word}</h3>
+            <div class="space-y-3">
+                <p><strong>Meaning:</strong> ${wordData2.meaning || "N/A"}</p>
+                <p><strong>Pronunciation:</strong> ${wordData.pronunciation}</p>
+                <p><strong>Part of Speech:</strong> <span class="italic text-gray-600">${wordData2.partsOfSpeech || "N/A"}</span></p>
+                <div class="bg-blue-50 p-3 rounded-lg border-l-4 border-blue-400">
+                    <p class="text-sm font-semibold text-blue-800">Example Sentence:</p>
+                    <p class="text-sm italic">"${wordData.sentence}"</p>
+                </div>
+                <p><strong>Synonyms:</strong> ${wordData.synonyms.join(", ")}</p>
+            </div>
+
+            <div class="modal-action mt-6 flex justify-end">
+              <form method="dialog">
+                <button class="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition">Got it!</button>
+              </form>
+            </div>
+          </div>
+        </dialog>
+    `;
+    
+    document.body.appendChild(modalContainer);
+    
+    const dialog = document.getElementById(`modal-${id}`);
+    dialog.showModal();
+
+    dialog.addEventListener('close', () => {
+        modalContainer.remove();
+    });
+} 
 
 async function loadDataByLevel(level) {
   const res = await fetch(
@@ -45,19 +99,19 @@ async function loadDataByLevel(level) {
 
     div2.innerHTML = `
             <div class="bg-white p-6 rounded-xl shadow-sm hover:shadow-md transition border border-gray-100 flex flex-col items-center text-center h-full">
-                <h3 class="text-xl font-bold text-gray-800 mb-1">${element.word}</h3>
-                <h4 class="text-xs text-gray-500 mb-3">Meaning/Pronunciation</h4>
-                <p class="text-lg font-medium text-gray-700 mb-6">${element.meaning} / ${element.pronunciation}</p>
-            
-                <div class="w-full flex justify-between items-center mt-auto">
-                    <button class="w-8 h-8 flex items-center justify-center rounded-full bg-blue-50 text-gray-600 hover:bg-blue-100 transition">
-                        <i class="fa-solid fa-info"></i>
-                    </button>
-                    <button class="w-8 h-8 flex items-center justify-center rounded-full bg-blue-50 text-gray-600 hover:bg-blue-100 transition">
-                        <i class="fa-solid fa-volume-high"></i>
-                    </button>
-                </div>
-            </div>
+        <h3 class="text-xl font-bold">${element.word}</h3>
+        <h4 class="text-xs text-gray-500">Meaning/Pronunciation</h4>
+        <p class="text-gray-700">${element.meaning || "N/A"} / ${element.pronunciation}</p>
+       
+        <div class="w-full flex justify-between items-center mt-auto pt-4">
+            <button onclick="handleDetails(${element.id})" class="w-8 h-8 flex items-center justify-center rounded-full bg-blue-50 text-gray-600 hover:bg-blue-100 transition">
+                <i class="fa-solid fa-info"></i>
+            </button>
+            <button class="w-8 h-8 flex items-center justify-center rounded-full bg-blue-50 text-gray-600 hover:bg-blue-100 transition">
+                <i class="fa-solid fa-volume-high"></i>
+            </button>
+        </div>
+      </div>
         `;
     div.appendChild(div2);
   });
@@ -143,7 +197,7 @@ lesson7.addEventListener("click", function () {
     lesson3.classList.remove("bg-blue-700", "text-white");
     lesson4.classList.remove("bg-blue-700", "text-white");
     lesson5.classList.remove("bg-blue-700", "text-white");
-    
+
 });
 
 loadData();
